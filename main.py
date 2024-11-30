@@ -3,12 +3,16 @@ import tkinter as tk
 from tkinter import ttk
 
 class Main_window(tk.Tk):
+    '''
+    Class that generates the main menu for the menu app
+    '''
     def __init__(self):
         super().__init__()
         self.geometry('1350x200')
         self.resizable(False, False)
         self.title('Main Window')
 
+        # Initialize days of the week
         days = (
             'Monday', 
             'Tuesday', 
@@ -19,12 +23,14 @@ class Main_window(tk.Tk):
             'Sunday'
             )
         
+        # Go through days of the week, create frames
         for row, day in enumerate(days):
             self.make_day_frame(day, row)
 
         btn_height = 3
         btn_width = 15
 
+        # Create buttons
         self.manage_meals_btn = tk.Button(
             self,
             text= 'Manage Meals',
@@ -49,6 +55,10 @@ class Main_window(tk.Tk):
 
 
     def make_day_frame(Main_window, day: str, column):
+        '''
+        Generates a frame for a single day for the week calendar
+        '''
+
         day_frame = tk.LabelFrame(
             Main_window,
             bg= '#434343',
