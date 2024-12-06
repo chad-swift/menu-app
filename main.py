@@ -1,6 +1,7 @@
 
 import tkinter as tk
 from tkinter import ttk
+from manage_meals import *
 
 class Main_window(tk.Tk):
     '''
@@ -36,7 +37,8 @@ class Main_window(tk.Tk):
             text= 'Manage Meals',
             height= btn_height,
             width= btn_width,
-            activebackground= '#FF0000'
+            activebackground= '#FF0000',
+            command= Manage_meals
         ).grid(row= 0, column= 7)
 
         self.manage_ingredients_btn = tk.Button(
