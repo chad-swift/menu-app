@@ -23,14 +23,14 @@ class Manage_meals(tk.Tk):
             'stuff I can not pronounce'
         )
 
-        self.mealListLabel = tk.Label(
+        self.meal_list_label = tk.Label(
             self,
             text= 'Meal List:'
         ).grid(row= 0, column= 0, sticky= 'w')
 
-        self.selectedMeal = tk.IntVar()
+        self.selected_meal = tk.IntVar()
 
-        self.mealList = tk.Listbox(
+        self.meal_list = tk.Listbox(
             self,
             width= '30',
             height= '10',
@@ -38,24 +38,24 @@ class Manage_meals(tk.Tk):
         )
 
         for meal in sampleMeals:
-            self.mealList.insert(tk.END, meal)
+            self.meal_list.insert(tk.END, meal)
 
-        self.mealList.grid(row= 1, column= 0, columnspan= 3, sticky= 'we', padx= 15, pady= 3)
+        self.meal_list.grid(row= 1, column= 0, sticky= 'we', padx= 15, pady= 3)
 
-        self.deleteMealBtn = tk.Button(
+        self.delete_meal_btn = tk.Button(
             self,
             text= 'Delete Meal',
             fg= 'red',
-            command= self.deleteMeal
-        ).grid(row= 2, column= 0, columnspan= 3)
+            command= self.delete_meal
+        ).grid(row= 2, column= 0)
 
-    def deleteMeal(self):
-        selection = self.mealList.curselection()
+    def delete_meal(self):
+        selection = self.meal_list.curselection()
 
         if selection:
-            self.mealList.delete(selection[0])
+            self.meal_list.delete(selection[0])
 
-def runWindow():
+def run_window():
     Manage_meals().mainloop()
 
-runWindow()
+run_window()
