@@ -54,26 +54,26 @@ class Main_window(tk.Tk):
         ).grid(row= 2, column= 7)
 
 
-    def make_day_frame(Main_window, day: str, column):
+    def make_day_frame(self, day: str, column):
         '''
         Generates a frame for a single day for the week calendar
         '''
 
-        day_frame = tk.LabelFrame(
-            Main_window,
+        self.day_frame = tk.LabelFrame(
+            self,
             bg= '#434343',
             width= 166,
             height= 190,
         ).grid(row= 0, column= column, rowspan= 3)
 
-        day_label = tk.Label(
-            day_frame,
+        self.day_label = tk.Label(
+            self.day_frame,
             text= day,
             bg= '#434343'
         ).grid(row= 0, column= column)
 
-        meal_selector = ttk.Combobox(
-            day_frame,
+        self.meal_selector = ttk.Combobox(
+            self.day_frame,
             width= 10
         ).grid(row= 1, column= column)
 
