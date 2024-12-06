@@ -4,10 +4,10 @@ class Manage_meals(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title('Manage Meals')
-        self.geometry('300x800'),
+        self.geometry('300x300'),
         self.resizable(False, False)
 
-        sampleMeals = (
+        sample_meals = (
             'meatballs',
             'sandwhich',
             'pasta',
@@ -37,7 +37,7 @@ class Manage_meals(tk.Tk):
             selectmode= 'browse'
         )
 
-        for meal in sampleMeals:
+        for meal in sample_meals:
             self.meal_list.insert(tk.END, meal)
 
         self.meal_list.grid(row= 1, column= 0, sticky= 'we', padx= 15, pady= 3)
@@ -48,6 +48,12 @@ class Manage_meals(tk.Tk):
             fg= 'red',
             command= self.delete_meal
         ).grid(row= 2, column= 0)
+
+        self.add_meal_btn = tk.Button(
+            self,
+            text= 'Add New Meal',
+            fg= 'green'
+        ).grid(row= 3, column= 0)
 
     def delete_meal(self):
         selection = self.meal_list.curselection()
