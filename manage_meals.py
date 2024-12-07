@@ -1,4 +1,6 @@
 import tkinter as tk
+from add_new_meal import *
+from sample_data import *
 
 class Manage_meals(tk.Tk):
     def __init__(self):
@@ -7,21 +9,7 @@ class Manage_meals(tk.Tk):
         self.geometry('300x300'),
         self.resizable(False, False)
 
-        sample_meals = (
-            'meatballs',
-            'sandwhich',
-            'pasta',
-            'spaghet',
-            'bananas',
-            'oatmeal',
-            'tacos',
-            'porcupine soup',
-            'silly rabbits',
-            'cereal',
-            'footballs',
-            'christmas trees',
-            'stuff I can not pronounce'
-        )
+        self.meals = sample_meals
 
         self.meal_list_label = tk.Label(
             self,
@@ -37,7 +25,7 @@ class Manage_meals(tk.Tk):
             selectmode= 'browse'
         )
 
-        for meal in sample_meals:
+        for meal in self.meals:
             self.meal_list.insert(tk.END, meal)
 
         self.meal_list.grid(row= 1, column= 0, sticky= 'we', padx= 15, pady= 3)
@@ -52,7 +40,8 @@ class Manage_meals(tk.Tk):
         self.add_meal_btn = tk.Button(
             self,
             text= 'Add New Meal',
-            fg= 'green'
+            fg= 'green',
+            command= Add_new_meal
         ).grid(row= 3, column= 0)
 
     def delete_meal(self):
@@ -60,8 +49,3 @@ class Manage_meals(tk.Tk):
 
         if selection:
             self.meal_list.delete(selection[0])
-
-def run_window():
-    Manage_meals().mainloop()
-
-run_window()
