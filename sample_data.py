@@ -1,5 +1,5 @@
 
-
+#todo: sample meals should be a dictionary which saves the ingredients used and quantities
 sample_meals = (
             'meatballs',
             'sandwhich',
