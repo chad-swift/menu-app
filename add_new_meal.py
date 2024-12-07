@@ -102,7 +102,9 @@ class Add_new_meal(tk.Tk):
             width= 10
         )
 
-        # this variable here is what is being updated with the bound method in comboBox
+        # this variable here is what is being updated with the bound method in comboBox.
+
+        # Right now there is a bug. When this window is called from other windows this text will not show up, but when I add code to call itself it does
         self.amt_quantifier = tk.StringVar(value= 'Qty')
 
 
