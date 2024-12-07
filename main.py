@@ -74,9 +74,12 @@ class Main_window(tk.Tk):
             bg= '#434343'
         ).grid(row= 0, column= column)
 
+        self.meals = sample_meals
+
         self.meal_selector = ttk.Combobox(
             self.day_frame,
-            width= 10
+            width= 10,
+            values= self.meals
         ).grid(row= 1, column= column)
 
 
