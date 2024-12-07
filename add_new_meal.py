@@ -170,9 +170,11 @@ class Add_new_meal(tk.Tk):
         # this variable then grabs the amount of the ingredient stored in the name
         ingredient_amt = self.ingredient_amt_var.get()
 
+        ingredient_quantifier = self.amt_quantifier.get()
+
         # a string is then inserted in the Listbox for the user to see, containing the amount added and of what
         if ingredient_name:
-            self.ingredientList.insert(tk.END, (f'{ingredient_amt:.1f}   {currentSelectionName}'))
+            self.ingredientList.insert(tk.END, (f'{ingredient_amt:.1f} {ingredient_quantifier} of {currentSelectionName}'))
 
         # the spinbox variable is then reset to 0 so the user doesn't accidentally add in the same quantity for the next ingredient
         self.ingredient_amt_var.set(0.0)
