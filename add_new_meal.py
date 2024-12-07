@@ -61,9 +61,6 @@ class add_new_meal(tk.Tk):
             height= 200
         )
 
-        for i in range(5):
-            tk.Label(self.add_ingredients_frame, text= "   ").grid(row= 0, column= i)
-
         self.ingredient_choice_arr = []
 
         for key in self.sample_ingredients.keys():
@@ -97,7 +94,7 @@ class add_new_meal(tk.Tk):
             to_= 100,
             increment= 0.25,
             textvariable= self.ingredient_amt_var,
-            width= 4
+            width= 10
         ).grid(row= 2, column= 1, sticky= 'w')
 
         self.amt_quantifier = tk.StringVar(value= 'Qty')
@@ -120,7 +117,7 @@ class add_new_meal(tk.Tk):
             text= 'Finish, Add New Meal to Meal List'
         ).grid(row= 5, columnspan= 4)
 
-        self.add_ingredients_frame.grid(row= 6, columnspan= 4,)
+        self.add_ingredients_frame.grid(row= 6, column= 0, columnspan= 4, sticky= 'w', padx= 10)
 
     def add_ingredient_to_meal(self):
         ingredient_name = self.ingredient_choices.current()
@@ -131,6 +128,10 @@ class add_new_meal(tk.Tk):
 
         if ingredient_name:
             self.ingredientList.insert(tk.END, (f'{ingredient_amt:.1f}   {currentSelectionName}'))
+
+        self.ingredient_amt_var.set(0.0)
+
+        self.ingredient_choices.set('')
 
     def update_amt_quanitfier(self, event):
         self.currentSelection = self.ingredient_choices.current()
