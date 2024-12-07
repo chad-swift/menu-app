@@ -31,7 +31,7 @@ class add_new_meal(tk.Tk):
 
         self.ingredientList = tk.Listbox(
             self,
-            width= 45
+            width= 52
         )
 
 
@@ -55,7 +55,7 @@ class add_new_meal(tk.Tk):
 
         self.ingredients_section_label = tk.Label(
            self,
-            text= 'Add Ingredient From Ingredient List To Ingredients List in Meal:'
+            text= 'Add Ingredient:'
         )
         
 
@@ -114,32 +114,36 @@ class add_new_meal(tk.Tk):
         self.add_ingredient_to_list_btn = tk.Button(
             self.add_ingredients_frame,
             text= 'Add Ingredient to Meal',
-            command= self.add_ingredient_to_meal
+            command= self.add_ingredient_to_meal,
+            fg= 'green'
         )
 
         self.add_to_meal_btn = tk.Button(
             self.add_ingredients_frame,
-            text= 'Finish, Add New Meal to Meal List'
+            text= 'Add Meal',
+            fg= 'green'
         )
 
         self.grid_items()
 
     def grid_items(self):
         
-        self.name_label.grid(row= 0, column= 0, columnspan= 3, sticky= 'w')
+        self.name_label.grid(row= 0, column= 0, columnspan= 3, sticky= 'w', pady = 10)
         self.name_input.grid(row= 0, column= 1, sticky= 'w')
-        self.ingredient_list_label.grid(row= 1, column= 0, sticky= 'w')
+        self.ingredient_list_label.grid(row= 1, column= 0, sticky= 'w', pady= 10)
         self.ingredientList.grid(row= 3, column= 0, columnspan= 4, sticky= 'w', padx= 10)
-        self.remove_added_ingredients_btn.grid(row= 4, columnspan= 4)
+        self.remove_added_ingredients_btn.grid(row= 4, columnspan= 4, pady= 10)
 
-        self.ingredients_section_label.grid(row= 5, columnspan= 4, sticky= 'w')
-        self.ingredient_name_label.grid(row= 1, column= 0, sticky= 'w', columnspan= 3)
+        self.ingredients_section_label.grid(row= 5, columnspan= 4, sticky= 'w', pady= 20)
+
+        self.ingredient_name_label.grid(row= 1, column= 0, sticky= 'w', columnspan= 3, pady= 10)
+        self.ingredient_spacer = tk.Label(self.add_ingredients_frame, text= '').grid(row= 1, column= 2, padx= 110)
         self.ingredient_choices.grid(row= 1, column= 1, sticky= 'w')
-        self.ingredient_amt_label.grid(row= 2, column= 0, sticky= 'w')
+        self.ingredient_amt_label.grid(row= 2, column= 0, sticky= 'w', pady= 10)
         self.ingredient_amt_input.grid(row= 2, column= 1, sticky= 'w')
         self.ingredient_amt_quantifier.grid(row= 2, column= 2, columnspan= 2, sticky= 'w')
-        self.add_ingredient_to_list_btn.grid(row= 4, column= 0, columnspan= 4)
-        self.add_to_meal_btn.grid(row= 5, columnspan= 4)
+        self.add_ingredient_to_list_btn.grid(row= 3, column= 0, columnspan= 4)
+        self.add_to_meal_btn.grid(row= 4, columnspan= 4, pady= 10)
         self.add_ingredients_frame.grid(row= 6, column= 0, columnspan= 4, sticky= 'w', padx= 10)
 
     def add_ingredient_to_meal(self):
