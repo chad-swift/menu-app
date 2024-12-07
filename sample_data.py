@@ -9,11 +9,11 @@ sample_meals = (
             'oatmeal',
             'tacos',
             'porcupine soup',
-            'silly rabbits',
+            'rabbit stew',
             'cereal',
-            'footballs',
-            'christmas trees',
-            'stuff I can not pronounce'
+            'pizza',
+            'chicken nuggets',
+            'beef stew'
         )
 
 sample_ingredients = {
