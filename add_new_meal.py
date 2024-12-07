@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
-
-class add_new_meal(tk.Tk):
+from sample_data import *
+class Add_new_meal(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title('Add New Meal')
@@ -35,15 +35,7 @@ class add_new_meal(tk.Tk):
         )
 
 
-        self.sample_ingredients = {
-            'pepperoni': 'pcs',
-            'ham': 'lbs',
-            'sausage': 'pcs',
-            'tomato': 'lbs',
-            'mustard': 'oz',
-            'black olives': 'pc',
-            'cheese': 'pcs'
-        }
+        self.ingredients = sample_ingredients
 
         self.remove_added_ingredients_btn = tk.Button(
             self,
@@ -67,7 +59,7 @@ class add_new_meal(tk.Tk):
 
         self.ingredient_choice_arr = []
 
-        for key in self.sample_ingredients.keys():
+        for key in self.ingredients.keys():
             self.ingredient_choice_arr.append(key)
 
         self.ingredient_choices = ttk.Combobox(
@@ -83,7 +75,6 @@ class add_new_meal(tk.Tk):
             text= 'Ingredient Name:'
         )
         
-
 
         self.ingredient_amt_label = tk.Label(
             self.add_ingredients_frame,
@@ -165,16 +156,10 @@ class add_new_meal(tk.Tk):
 
         self.currentSelectionName = self.ingredient_choice_arr[self.currentSelection]
 
-        self.amt_quantifier.set(self.sample_ingredients[self.currentSelectionName])
+        self.amt_quantifier.set(self.ingredients[self.currentSelectionName])
 
     def remove_ingredients_from_meal(self):
         selection = self.ingredientList.curselection()
 
         if selection:
             self.ingredientList.delete(selection[0])
-
-
-def run_window():
-    add_new_meal().mainloop()
-
-run_window()
