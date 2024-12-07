@@ -14,24 +14,26 @@ class add_new_meal(tk.Tk):
         self.name_label = tk.Label(
             self,
             text= 'Name of new Meal:'
-        ).grid(row= 0, column= 0, columnspan= 3, sticky= 'w')
+        )
+        
 
         self.name_input = tk.Entry(
             self,
             width= 30
-        ).grid(row= 0, column= 1, sticky= 'w')
+        )
+        
 
         self.ingredient_list_label = tk.Label(
             self,
             text= 'List of Ingredients in Meal:'
-        ).grid(row= 1, column= 0, sticky= 'w')
+        )
+        
 
         self.ingredientList = tk.Listbox(
             self,
             width= 45
         )
 
-        self.ingredientList.grid(row= 3, column= 0, columnspan= 4, sticky= 'w', padx= 10)
 
         self.sample_ingredients = {
             'pepperoni': 'pcs',
@@ -48,12 +50,14 @@ class add_new_meal(tk.Tk):
             text= 'Remove Selected Ingredients',
             fg= 'red',
             command= self.remove_ingredients_from_meal
-        ).grid(row= 4, columnspan= 4)
+        )
+        
 
         self.ingredients_section_label = tk.Label(
            self,
             text= 'Add Ingredient From Ingredient List To Ingredients List in Meal:'
-        ).grid(row= 5, columnspan= 4, sticky= 'w')
+        )
+        
 
         self.add_ingredients_frame = tk.LabelFrame(
             self,
@@ -77,25 +81,27 @@ class add_new_meal(tk.Tk):
         self.ingredient_name_label = tk.Label(
             self.add_ingredients_frame,
             text= 'Ingredient Name:'
-        ).grid(row= 1, column= 0, sticky= 'w', columnspan= 3)
+        )
+        
 
-        self.ingredient_choices.grid(row= 1, column= 1, sticky= 'w')
 
         self.ingredient_amt_label = tk.Label(
             self.add_ingredients_frame,
             text= 'Ingredient Amount: '
-        ).grid(row= 2, column= 0, sticky= 'w')
+        )
+        
 
         self.ingredient_amt_var = tk.DoubleVar()
 
-        self.ingredient_amt = tk.Spinbox(
+        self.ingredient_amt_input = tk.Spinbox(
             self.add_ingredients_frame,
             from_= 0,
             to_= 100,
             increment= 0.25,
             textvariable= self.ingredient_amt_var,
             width= 10
-        ).grid(row= 2, column= 1, sticky= 'w')
+        )
+        
 
         self.amt_quantifier = tk.StringVar(value= 'Qty')
 
@@ -104,19 +110,36 @@ class add_new_meal(tk.Tk):
             textvariable = self.amt_quantifier
         )
         
-        self.ingredient_amt_quantifier.grid(row= 2, column= 2, columnspan= 2, sticky= 'w')
 
         self.add_ingredient_to_list_btn = tk.Button(
             self.add_ingredients_frame,
             text= 'Add Ingredient to Meal',
             command= self.add_ingredient_to_meal
-        ).grid(row= 4, column= 0, columnspan= 4)
+        )
 
-        self.add_meal_btn = tk.Button(
+        self.add_to_meal_btn = tk.Button(
             self.add_ingredients_frame,
             text= 'Finish, Add New Meal to Meal List'
-        ).grid(row= 5, columnspan= 4)
+        )
 
+        self.grid_items()
+
+    def grid_items(self):
+        
+        self.name_label.grid(row= 0, column= 0, columnspan= 3, sticky= 'w')
+        self.name_input.grid(row= 0, column= 1, sticky= 'w')
+        self.ingredient_list_label.grid(row= 1, column= 0, sticky= 'w')
+        self.ingredientList.grid(row= 3, column= 0, columnspan= 4, sticky= 'w', padx= 10)
+        self.remove_added_ingredients_btn.grid(row= 4, columnspan= 4)
+
+        self.ingredients_section_label.grid(row= 5, columnspan= 4, sticky= 'w')
+        self.ingredient_name_label.grid(row= 1, column= 0, sticky= 'w', columnspan= 3)
+        self.ingredient_choices.grid(row= 1, column= 1, sticky= 'w')
+        self.ingredient_amt_label.grid(row= 2, column= 0, sticky= 'w')
+        self.ingredient_amt_input.grid(row= 2, column= 1, sticky= 'w')
+        self.ingredient_amt_quantifier.grid(row= 2, column= 2, columnspan= 2, sticky= 'w')
+        self.add_ingredient_to_list_btn.grid(row= 4, column= 0, columnspan= 4)
+        self.add_to_meal_btn.grid(row= 5, columnspan= 4)
         self.add_ingredients_frame.grid(row= 6, column= 0, columnspan= 4, sticky= 'w', padx= 10)
 
     def add_ingredient_to_meal(self):
