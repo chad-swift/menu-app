@@ -28,8 +28,8 @@ class Main_window(tk.Tk):
         for row, day in enumerate(days):
             self.make_day_frame(day, row)
 
-        btn_height = 3
-        btn_width = 15
+        btn_height = 2
+        btn_width = 12
 
         # Create buttons
         self.manage_meals_btn = tk.Button(
@@ -38,22 +38,28 @@ class Main_window(tk.Tk):
             height= btn_height,
             width= btn_width,
             activebackground= '#FF0000',
-            command= Manage_meals
-        ).grid(row= 0, column= 7)
+            command= Manage_meals,
+        )
+        
 
         self.manage_ingredients_btn = tk.Button(
             self,
             text= 'Manage Ingredients',
             height= btn_height,
             width= btn_width
-        ).grid(row= 1, column= 7)
+        )
+        
 
         self.export_btn = tk.Button(
             self,
             text= 'Export Menu and List',
             height= btn_height,
             width= btn_width
-        ).grid(row= 2, column= 7)
+        )
+        
+        self.manage_meals_btn.grid(row= 0, column= 7, padx= 10)
+        self.manage_ingredients_btn.grid(row= 1, column= 7)
+        self.export_btn.grid(row= 2, column= 7)
 
 
     def make_day_frame(self, day: str, column):
@@ -66,13 +72,15 @@ class Main_window(tk.Tk):
             bg= '#434343',
             width= 166,
             height= 190,
-        ).grid(row= 0, column= column, rowspan= 3)
+        )
+        
 
         self.day_label = tk.Label(
             self.day_frame,
             text= day,
             bg= '#434343'
-        ).grid(row= 0, column= column)
+        )
+        
 
         self.meals = sample_meals
 
@@ -80,7 +88,11 @@ class Main_window(tk.Tk):
             self.day_frame,
             width= 10,
             values= self.meals
-        ).grid(row= 1, column= column)
+        )
+        
+        self.day_label.grid(row= 0, column= column)
+        self.meal_selector.grid(row= 1, column= column, padx= 21,pady= 62)
+        self.day_frame.grid(row= 0, column= column, rowspan= 3, pady= 10)
 
 
         
