@@ -2,7 +2,7 @@ import tkinter as tk
 from add_new_meal import *
 from sample_data import *
 
-class Manage_meals(tk.Tk):
+class Manage_meals(tk.Toplevel):
     '''
     Window that allows the user to manage meals stored in memory for the application. Only meals previously added will be shown. The user can then delete meals out of the list or add a new meal by using a different window
     '''

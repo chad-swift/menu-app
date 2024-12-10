@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from sample_data import *
-class Add_new_meal(tk.Tk):
+class Add_new_meal(tk.Toplevel):
     '''
     This window will allow the user to create a new meal, and add that meal to the meal list, where it will show up in all windows that need it
     '''
