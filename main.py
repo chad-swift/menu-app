@@ -2,6 +2,7 @@
 import tkinter as tk
 from tkinter import ttk
 from manage_meals import *
+from manage_ingredients import *
 
 class Main_window(tk.Tk):
     '''
@@ -46,7 +47,8 @@ class Main_window(tk.Tk):
             self,
             text= 'Manage Ingredients',
             height= btn_height,
-            width= btn_width
+            width= btn_width,
+            command= Manage_ingredients
         )
         
 
