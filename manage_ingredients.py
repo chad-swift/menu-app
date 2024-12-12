@@ -117,4 +117,6 @@ class Manage_ingredients(tk.Toplevel):
             self.error_message_var.set('Ingredient Name and quanitfier must both be filled out!')
         else:
             self.ingredient_list.insert(tk.END, f'{ingredient_name}, measured in {ingredient_quantifier}')
+            self.add_ingredient_name_input.delete(0, tk.END)
+            self.add_ingredients_quanitfier_input.delete(0, tk.END)
         
