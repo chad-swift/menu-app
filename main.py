@@ -97,10 +97,6 @@ class Main_window(tk.Tk):
         self.day_frame.grid(row= 0, column= column, rowspan= 3, pady= 10)
 
 
-        
-
-
-
 
 if __name__ == '__main__':
     Main_window().mainloop()
