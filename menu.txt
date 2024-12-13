@@ -1,0 +1,17 @@
+Menu:
+----------------
+Monday: Sample Meal 
+Tuesday: Corn on the Cobb 
+Wednesday: Tomato Soup 
+Thursday: Corn on the Cobb 
+Friday: Ham Sandwichas 
+Saturday: Sample Meal 
+Sunday: Corn on the Cobb 
+
+Ingredients Needed for Meals selected:
+-----------------
+4.00 oz of Banana
+4.00 lbs of Ham
+2.10 tsp of Mustard
+5.80 slc of Cheese
+0.00 qty of Turkey
