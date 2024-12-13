@@ -54,7 +54,7 @@ class Manage_meals(tk.Toplevel):
             self,
             text= 'Add New Meal',
             fg= 'green',
-            command= Add_new_meal
+            command= lambda: self.destroy() or Add_new_meal(root)
         )
         
         self.meal_list_label.grid(row= 0, column= 0, sticky= 'w')
