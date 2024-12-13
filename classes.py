@@ -1,5 +1,3 @@
-import pickle
-
 class Ingredient():
     def __init__(self, name: str, quantifier: str):
         self.name = name
@@ -21,9 +19,20 @@ class Ingredient():
         return (f'{self.name: <15}|{self.quantifier: >10}')
 
 class Meal():
-    def __init__(self, name, ingredients: list[Ingredient]):
+    def __init__(self, name: str, ingredients: list[tuple[Ingredient, float]]):
         self.name = name
         self.ingredients = ingredients
+
+        self.ingredient_list = {}
+
+        for ingredient, quantity in self.ingredients:
+            self.ingredient_list[ingredient.get_name()] = {
+                "ingredient": ingredient,
+                "quantity": quantity
+            }
+
+    def get_structure(self):
+        return self.ingredient_list
 
     def get_name(self):
         return self.name
@@ -32,27 +41,40 @@ class Meal():
         self.name = new_name
 
     def get_ingredients(self):
-        return self.ingredients
+        ingredients = []
+
+        for _, value in self.ingredient_list.items():
+            ingredients.append(value['ingredient'])
+
+        return ingredients
+
+    def get_ingredient_names(self):
+        names = []
+
+        for key, value in self.ingredient_list.items():
+            names.append(key)
+
+        return names
     
-    def append_ingredient(self, ingredient: Ingredient):
-        self.ingredients.append(ingredient)
+    def get_ingredient_quantities(self):
+        quantities = []
 
+        for key, value in self.ingredient_list.items():
+            quantities.append((key, value['quantity']))
 
-def createSampleData():
-    banana = Ingredient('Banana', 'oz')
-    ham = Ingredient('Ham', 'lbs')
-    mustard = Ingredient('Mustard', 'tsp')
+        return quantities
+    
+    def get_specific_ingredient_quantity(self, ingredient_name):
+        return self.ingredient_list[ingredient_name]['quantity']
+    
+    def set_specific_ingredient_quantity(self, ingredient_name, new_quantity):
+        self.ingredient_list[ingredient_name]['quantity'] = new_quantity
 
-    ingredientList1 = [banana, ham, mustard]
-
-    sample_meal = Meal('Sample Meal', ingredientList1)
-
-    list_of_meals = [sample_meal]
-
-    with open('meals.dat', 'wb') as f:
-        pickle.dump(list_of_meals, f)
-
-    with open('ingredients.dat', 'wb') as f:
-        pickle.dump(ingredientList1, f)
-
-createSampleData()
+    def get_specific_ingredient_quantifier(self, ingredient_name: str):
+        return self.ingredient_list[ingredient_name]['ingredient'].get_quantifier()
+    
+    def append_ingredient(self, ingredient: Ingredient, quantity):
+        self.ingredient_list[ingredient] = {
+            "ingredient": ingredient,
+            "quantity": quantity
+        }
