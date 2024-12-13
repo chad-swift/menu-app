@@ -4,6 +4,7 @@ from tkinter import messagebox
 from sample_data import *
 from classes import *
 from main import *
+import pickle
 class Add_new_meal(tk.Toplevel):
     '''
     This window will allow the user to create a new meal, and add that meal to the meal list, where it will show up in all windows that need it
