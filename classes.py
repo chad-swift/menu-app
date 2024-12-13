@@ -31,9 +31,6 @@ class Meal():
                 "quantity": quantity
             }
 
-    def get_structure(self):
-        return self.ingredient_list
-
     def get_name(self):
         return self.name
     
