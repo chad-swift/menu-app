@@ -94,13 +94,17 @@ class Main_window(tk.Tk):
             except EOFError:
                 self.meals = []
 
+        self.meal_list = []
+
+        for meal in self.meals:
+            self.meal_list.append(meal.get_name())
+
         self.meal_selector = ttk.Combobox(
             self.day_frame,
             width= 10,
+            values= self.meal_list
         )
 
-        for meal in self.meals:
-            self.meal_selector.insert(tk.END, meal.get_name())
         
         self.day_label.grid(row= 0, column= column)
         self.meal_selector.grid(row= 1, column= column, padx= 21,pady= 62)
