@@ -1,6 +1,7 @@
 import tkinter as tk
 from sample_data import *
-
+from classes import *
+import pickle
 class Manage_ingredients(tk.Toplevel):
  
 
@@ -12,8 +13,13 @@ class Manage_ingredients(tk.Toplevel):
 
         self.ingredients = []
 
-        for key, value in sample_ingredients.items():
-            self.ingredients.append(f'{key}, measured in {value}')
+        with open('ingredients.dat', 'rb') as f:
+            try:
+                ingredient_list: list[Ingredient] = pickle.load(f)
+                for ingredient in ingredient_list:
+                    self.ingredients.append(ingredient)
+            except EOFError:
+                ingredient_list = []
 
         self.ingredient_list_label = tk.Label(
             self,
@@ -108,6 +114,9 @@ class Manage_ingredients(tk.Toplevel):
 
         if selection:
             self.ingredient_list.delete(selection[0])
+            self.ingredients.pop(selection[0])
+            with open('ingredients.dat', 'wb') as f:
+                pickle.dump(self.ingredients, f)
 
     def add_ingredient(self):
         ingredient_name = self.add_ingredient_name_input.get()
@@ -116,7 +125,14 @@ class Manage_ingredients(tk.Toplevel):
         if not ingredient_name and not ingredient_quantifier:
             self.error_message_var.set('Ingredient Name and quanitfier must both be filled out!')
         else:
-            self.ingredient_list.insert(tk.END, f'{ingredient_name}, measured in {ingredient_quantifier}')
+            new_ingredient = Ingredient(ingredient_name, ingredient_quantifier)
+
+            self.ingredient_list.insert(tk.END, str(new_ingredient))
+            self.ingredients.append(new_ingredient)
+
+            with open('ingredients.dat', 'wb') as f:
+                pickle.dump(self.ingredients, f)
+
             self.add_ingredient_name_input.delete(0, tk.END)
             self.add_ingredients_quanitfier_input.delete(0, tk.END)
         
