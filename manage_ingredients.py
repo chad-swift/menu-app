@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 from sample_data import *
 from classes import *
 import pickle
@@ -125,6 +126,14 @@ class Manage_ingredients(tk.Toplevel):
         if not ingredient_name and not ingredient_quantifier:
             self.error_message_var.set('Ingredient Name and quanitfier must both be filled out!')
         else:
+            for ingredient in self.ingredients:
+                if ingredient.get_name() == ingredient_name:
+                    messagebox.showerror(
+                        title= 'Error',
+                        message= 'There is already an ingredient by that name'
+                    )
+                    return
+
             new_ingredient = Ingredient(ingredient_name, ingredient_quantifier)
 
             self.ingredient_list.insert(tk.END, str(new_ingredient))
