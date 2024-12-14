@@ -20,18 +20,6 @@ class Main_window(tk.Tk):
             self
         )
 
-        with open('meals.dat', 'rb') as f:
-            try:
-                self.meals: list[Meal] = pickle.load(f)
-            except EOFError:
-                self.meals = []
-
-        self.meal_list = []
-
-        for meal in self.meals:
-            self.meal_list.append(meal.get_name())
-
-
         with open('ingredients.dat', 'rb') as f:
             try:
                 self.ingredients: list[Ingredient] = pickle.load(f)
@@ -71,6 +59,7 @@ class Main_window(tk.Tk):
             command= self.create_menu_list
         )
         
+        
         self.week_frame.grid(row= 0, column= 0, rowspan= 3)
         self.manage_meals_btn.grid(row= 0, column= 7, padx= 10)
         self.manage_ingredients_btn.grid(row= 1, column= 7)
@@ -80,9 +69,17 @@ class Main_window(tk.Tk):
         
 
     def make_day_frames(self, week_frame: tk.Frame):
-        '''
-        Generates a frame for a single day for the week calendar
-        '''
+
+        with open('meals.dat', 'rb') as f:
+            try:
+                self.meals: list[Meal] = pickle.load(f)
+            except EOFError:
+                self.meals = []
+
+        self.meal_list = []
+
+        for meal in self.meals:
+            self.meal_list.append(meal.get_name())
 
         self.monday_frame = tk.LabelFrame(
             week_frame,
@@ -240,6 +237,8 @@ class Main_window(tk.Tk):
         self.sunday_frame.grid(row= 0, column= 6, rowspan= 3, pady= 10)
 
     def remake_week(self):
+
+
         self.week_frame.destroy()
         self.new_week_frame = tk.Frame(
             self
