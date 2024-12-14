@@ -1,10 +1,13 @@
 import tkinter as tk
+
+from numpy import imag
+from pyparsing import col
 from add_new_meal import *
 from sample_data import *
 from classes import *
 from main import *
 import pickle
-
+from PIL import Image, ImageTk
 
 class Manage_meals(tk.Toplevel):
     '''
@@ -14,9 +17,16 @@ class Manage_meals(tk.Toplevel):
         super().__init__()
         self.root = root
         self.title('Manage Meals')
-        self.geometry('300x300'),
+        self.geometry('300x350'),
         self.resizable(False, False)
         self.protocol("WM_DELETE_WINDOW", lambda: self.destroy() or self.update_main_window())
+
+        image = Image.open('stew.JPEG').resize(size= [75, 50])
+
+        self.image = ImageTk.PhotoImage(image)
+
+        self.icon = tk.Label(self, image= self.image)
+        
 
         # Currently this pulls from a sample meals file. This will eventually pull from a pickled data source. 
         
@@ -35,7 +45,7 @@ class Manage_meals(tk.Toplevel):
         self.meal_list = tk.Listbox(
             self,
             width= '30',
-            height= '10',
+            height= '10'
         )
 
         for meal in self.meals:
@@ -57,10 +67,11 @@ class Manage_meals(tk.Toplevel):
             command= lambda: self.destroy() or Add_new_meal(root)
         )
         
-        self.meal_list_label.grid(row= 0, column= 0, sticky= 'w')
-        self.meal_list.grid(row= 1, column= 0, sticky= 'we', padx= 15, pady= 3)
-        self.delete_meal_btn.grid(row= 2, column= 0)
-        self.add_meal_btn.grid(row= 3, column= 0)
+        self.icon.grid(row= 0, column= 0, columnspan= 4)
+        self.meal_list_label.grid(row= 1, column= 0, sticky= 'w')
+        self.meal_list.grid(row= 2, column= 0, sticky= 'we', padx= 15, pady= 3)
+        self.delete_meal_btn.grid(row= 3, column= 0)
+        self.add_meal_btn.grid(row= 4, column= 0)
 
     def delete_meal(self):
         '''
