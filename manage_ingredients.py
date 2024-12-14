@@ -134,7 +134,7 @@ class Manage_ingredients(tk.Toplevel):
         ingredient_name = self.add_ingredient_name_input.get()
         ingredient_quantifier = self.add_ingredients_quanitfier_input.get()
 
-        if not ingredient_name and not ingredient_quantifier:
+        if not ingredient_name or not ingredient_quantifier:
             self.error_message_var.set('Ingredient Name and quanitfier must both be filled out!')
         else:
             for ingredient in self.ingredients:
