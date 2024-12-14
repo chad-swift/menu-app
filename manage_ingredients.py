@@ -7,7 +7,9 @@ from classes import *
 import pickle
 from PIL import Image, ImageTk
 class Manage_ingredients(tk.Toplevel):
-
+    '''
+    This is a TopLevel Window class that manages all the ingredients within the database
+    '''
     def __init__(self):
         super().__init__()
         self.title('Manage Ingredients')
