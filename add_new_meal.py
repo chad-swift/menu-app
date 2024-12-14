@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
-from sample_data import *
 from classes import *
 from main import *
 import pickle

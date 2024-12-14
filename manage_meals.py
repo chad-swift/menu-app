@@ -3,7 +3,6 @@ import tkinter as tk
 from numpy import imag
 from pyparsing import col
 from add_new_meal import *
-from sample_data import *
 from classes import *
 from main import *
 import pickle

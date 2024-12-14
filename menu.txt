@@ -1,25 +1,25 @@
 Menu:
 ----------------
 Monday: Chicken 'N Dumplins 
-Tuesday: Fast Food 
+Tuesday: Chili 
 Wednesday: Salsa Chicken 
-Thursday: Chicken 'N Dumplins 
+Thursday: Fast Food 
 Friday:  
 Saturday:  
 Sunday:  
 
 Ingredients Needed for Meals selected:
 -----------------
-0.00 qty of Ground Beef
-0.00 qty of Tomato Juice
-0.00 qty of Chili Beans
-0.00 qty of Spaghetti Noodles
-0.00 qty of Chili Powder
-3.00 lbs of Chicken Breast
-90.40 oz of Cream of Chicken
-2.00 lbs of Frozen Vegtables
-15.00 oz of Biscuits
-2.00 tbsp of Pepper
-2.00 tbsp of Ms. Dash
+1.00 lbs of Ground Beef
+92.00 oz of Tomato Juice
+15.50 oz of Chili Beans
+0.50 lbs of Spaghetti Noodles
+2.00 tbsp of Chili Powder
+2.00 lbs of Chicken Breast
+45.20 oz of Cream of Chicken
+1.00 lbs of Frozen Vegtables
+7.50 oz of Biscuits
+1.00 tbsp of Pepper
+1.00 tbsp of Ms. Dash
 15.00 oz of Salsa
 3.00 cups of Rice

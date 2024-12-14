@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import messagebox
 
 from pyparsing import col
-from sample_data import *
 from classes import *
 import pickle
 from PIL import Image, ImageTk
