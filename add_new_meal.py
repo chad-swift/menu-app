@@ -218,6 +218,10 @@ class Add_new_meal(tk.Toplevel):
         
         name = self.name_input.get()
 
+        if not name:
+            messagebox.showerror(title= 'Error', message= 'You must have a name for your new meal')
+            return
+
         # this bit makes sure that it does not save a meal if that meal already exists
         for meal in self.meals:
             if name == meal.get_name():
