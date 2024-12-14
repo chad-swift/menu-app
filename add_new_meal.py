@@ -7,7 +7,7 @@ from main import *
 import pickle
 class Add_new_meal(tk.Toplevel):
     '''
-    This window will allow the user to create a new meal, and add that meal to the meal list, where it will show up in all windows that need it
+    This window will allow the user to create a new meal, and add that meal to the meal list, where it will show up in all windows that need it. The root is being passed to this function so that it has access to its methods
     '''
     def __init__(self, root: Main_window):
         super().__init__()
@@ -16,6 +16,7 @@ class Add_new_meal(tk.Toplevel):
         self.resizable(False, False)    
         self.root = root
 
+        # open meals from the database
         with open('meals.dat', 'rb') as f:
             try: 
                 self.meals: list[Meal] = pickle.load(f)
@@ -38,16 +39,12 @@ class Add_new_meal(tk.Toplevel):
             text= 'List of Ingredients in Meal:'
         )
 
+        # this is blank right now and it is supposed to be: a new meal will have no ingredients added to start with
         self.ingredient_list = tk.Listbox(
             self,
             width= 52
         )
 
-        
-        #currently this pulls from the sample data, but eventually this will pull from a pickled data source
-        
-
-        # button to remove ingredients added to the meal
         self.remove_added_ingredients_btn = tk.Button(
             self,
             text= 'Remove Selected Ingredients',
@@ -68,7 +65,7 @@ class Add_new_meal(tk.Toplevel):
             height= 200
         )
 
- 
+        # now we pull the ingredients from the data base in order to load it into the comboxbox so that the user can select it
         with open('ingredients.dat', 'rb') as f:
             try:
                 self.ingredients: list[Ingredient] = pickle.load(f)
@@ -112,17 +109,15 @@ class Add_new_meal(tk.Toplevel):
      
         self.amt_quantifier = tk.StringVar(value= 'Qty')
 
-
    
         self.ingredient_amt_quantifier = tk.Label(
             self.add_ingredients_frame,
             textvariable = self.amt_quantifier
         )
 
-      
+        # this is an event listener that listens for the combo box being activated
         self.ingredient_choices.bind('<<ComboboxSelected>>', self.update_amt_quanitfier)
 
-        
         self.add_ingredient_to_list_btn = tk.Button(
             self.add_ingredients_frame,
             text= 'Add Ingredient to Meal',
@@ -139,6 +134,7 @@ class Add_new_meal(tk.Toplevel):
 
         self.grid_items()
 
+        # this is the holding array for the ingredients
         self.ingredients_to_add = []
 
     def grid_items(self):
@@ -166,27 +162,26 @@ class Add_new_meal(tk.Toplevel):
 
     def add_ingredient_to_meal(self):
         '''
-        This method grabs the selection from the ingredients combobox, takes the amount from the spinbox, and puts them together in a string for the user. This method will also hold an object of everything added until it is ready to submit
+        This method grabs the selection from the ingredients combobox, takes the amount from the spinbox, and puts them together in a string for the user. It creates a new Meal class, appends it to the meals list, and then pickles the the meals list
         '''
 
         current_ingredient_index = self.ingredient_choices.current()
-
 
         current_selection_name = self.ingredient_choice_arr[current_ingredient_index]
 
         current_selection_ingredient: Ingredient = self.ingredients[current_ingredient_index]
 
-
         ingredient_amt = self.ingredient_amt_var.get()
 
         ingredient_quantifier = self.amt_quantifier.get()
 
-
         ingredient_names = []
 
+        # this will grab the names of all of the ingredients in the holding array and add them to a different array, to make it easier to find everything
         for ingredient, _ in self.ingredients_to_add:
             ingredient_names.append(ingredient.get_name())
 
+        # this code checks if an ingredient with the same name has already been added, it would not makes sense to have two of the same ingredient
         if current_selection_name not in ingredient_names:
             self.ingredient_list.insert(tk.END, (f'{ingredient_amt:.1f} {ingredient_quantifier} of {current_selection_name}'))
             self.ingredients_to_add.append((current_selection_ingredient, ingredient_amt))
@@ -196,8 +191,8 @@ class Add_new_meal(tk.Toplevel):
                 message= 'You already have an ingredient by that name in your meal!'
             )
 
+        # clear the combobox and the spinbox
         self.ingredient_amt_var.set(0.0)
-
         self.ingredient_choices.set('')
 
     def update_amt_quanitfier(self, event):
@@ -206,7 +201,6 @@ class Add_new_meal(tk.Toplevel):
         '''
 
         current_selection = self.ingredient_choices.current()
-
 
         self.amt_quantifier.set(self.ingredients[current_selection].get_quantifier())
 
@@ -224,6 +218,7 @@ class Add_new_meal(tk.Toplevel):
         
         name = self.name_input.get()
 
+        # this bit makes sure that it does not save a meal if that meal already exists
         for meal in self.meals:
             if name == meal.get_name():
                 messagebox.showerror(
@@ -232,13 +227,17 @@ class Add_new_meal(tk.Toplevel):
                 )
                 return
         
+        # if it does not already exist, it creates a new meal using the Meal class
         new_meal = Meal(self.name_input.get(), self.ingredients_to_add)
 
+        # appends that new meal to the meals data
         self.meals.append(new_meal)
 
+        # and writes that data to file
         with open('meals.dat', 'wb') as f:
             pickle.dump(self.meals, f)
 
+        # it will then refresh the main window, and close itself, keeping all the data fresh
         self.root.remake_week()
         self.root.deiconify()
         self.destroy()
