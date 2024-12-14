@@ -173,6 +173,10 @@ class Add_new_meal(tk.Toplevel):
 
         ingredient_amt = self.ingredient_amt_var.get()
 
+        if ingredient_amt == 0:
+            messagebox.showerror(title= 'Error', message= 'An ingredient must have more than 0 of it')
+            return
+
         ingredient_quantifier = self.amt_quantifier.get()
 
         ingredient_names = []
@@ -218,6 +222,7 @@ class Add_new_meal(tk.Toplevel):
         
         name = self.name_input.get()
 
+        # checks if the user filled out the name or not
         if not name:
             messagebox.showerror(title= 'Error', message= 'You must have a name for your new meal')
             return
