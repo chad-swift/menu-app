@@ -1,17 +1,25 @@
 Menu:
 ----------------
-Monday: Sample Meal 
-Tuesday: Corn on the Cobb 
-Wednesday: Tomato Soup 
-Thursday: Corn on the Cobb 
-Friday: Ham Sandwichas 
-Saturday: Sample Meal 
-Sunday: Corn on the Cobb 
+Monday: Chicken 'N Dumplins 
+Tuesday: Fast Food 
+Wednesday: Salsa Chicken 
+Thursday: Chicken 'N Dumplins 
+Friday:  
+Saturday:  
+Sunday:  
 
 Ingredients Needed for Meals selected:
 -----------------
-4.00 oz of Banana
-4.00 lbs of Ham
-2.10 tsp of Mustard
-5.80 slc of Cheese
-0.00 qty of Turkey
+0.00 qty of Ground Beef
+0.00 qty of Tomato Juice
+0.00 qty of Chili Beans
+0.00 qty of Spaghetti Noodles
+0.00 qty of Chili Powder
+3.00 lbs of Chicken Breast
+90.40 oz of Cream of Chicken
+2.00 lbs of Frozen Vegtables
+15.00 oz of Biscuits
+2.00 tbsp of Pepper
+2.00 tbsp of Ms. Dash
+15.00 oz of Salsa
+3.00 cups of Rice
