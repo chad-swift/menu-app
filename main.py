@@ -11,7 +11,7 @@ class Main_window(tk.Tk):
     '''
     def __init__(self):
         super().__init__()
-        self.geometry('1350x200')
+        self.geometry('1630x200')
         self.resizable(False, False)
         self.title('Main Window')
 
@@ -20,6 +20,7 @@ class Main_window(tk.Tk):
             self
         )
 
+        # open ingredients data that is used for writing the grocery export to file later
         with open('ingredients.dat', 'rb') as f:
             try:
                 self.ingredients: list[Ingredient] = pickle.load(f)
@@ -31,7 +32,7 @@ class Main_window(tk.Tk):
         btn_height = 2
         btn_width = 12
 
-        # Create buttons
+        # We pass the root on to the children windows so that they can manipulate things within this window later
         self.manage_meals_btn = tk.Button(
             self,
             text= 'Manage Meals',
@@ -66,10 +67,12 @@ class Main_window(tk.Tk):
         self.export_btn.grid(row= 2, column= 7)
 
 
-        
-
     def make_day_frames(self, week_frame: tk.Frame):
-
+        '''
+        Helper method for main class that generates the days for the week. 
+        Parameter: week_frame - A Frame class passed to the method that the days are then created within
+        '''
+        # loading the meal data happens here so that it reloads when this function is called for refreshing purposes
         with open('meals.dat', 'rb') as f:
             try:
                 self.meals: list[Meal] = pickle.load(f)
@@ -80,6 +83,8 @@ class Main_window(tk.Tk):
 
         for meal in self.meals:
             self.meal_list.append(meal.get_name())
+
+        SELECTOR_WIDTH = 15
 
         self.monday_frame = tk.LabelFrame(
             week_frame,
@@ -96,7 +101,7 @@ class Main_window(tk.Tk):
 
         self.monday_meal_selector = ttk.Combobox(
             self.monday_frame,
-            width= 10,
+            width= SELECTOR_WIDTH,
             values= self.meal_list,
         )
 
@@ -115,7 +120,7 @@ class Main_window(tk.Tk):
 
         self.tuesday_meal_selector = ttk.Combobox(
             self.tuesday_frame,
-            width= 10,
+            width= SELECTOR_WIDTH,
             values= self.meal_list
         )
 
@@ -134,7 +139,7 @@ class Main_window(tk.Tk):
 
         self.wednesday_meal_selector = ttk.Combobox(
             self.wednesday_frame,
-            width= 10,
+            width= SELECTOR_WIDTH,
             values= self.meal_list
         )
 
@@ -153,7 +158,7 @@ class Main_window(tk.Tk):
 
         self.thursday_meal_selector = ttk.Combobox(
             self.thursday_frame,
-            width= 10,
+            width= SELECTOR_WIDTH,
             values= self.meal_list
         )
 
@@ -172,7 +177,7 @@ class Main_window(tk.Tk):
 
         self.friday_meal_selector = ttk.Combobox(
             self.friday_frame,
-            width= 10,
+            width= SELECTOR_WIDTH,
             values= self.meal_list
         )
 
@@ -191,7 +196,7 @@ class Main_window(tk.Tk):
 
         self.saturday_meal_selector = ttk.Combobox(
             self.saturday_frame,
-            width= 10,
+            width= SELECTOR_WIDTH,
             values= self.meal_list
         )
 
@@ -210,7 +215,7 @@ class Main_window(tk.Tk):
 
         self.sunday_meal_selector = ttk.Combobox(
             self.sunday_frame,
-            width= 10,
+            width= SELECTOR_WIDTH,
             values= self.meal_list
         )
         
@@ -237,19 +242,27 @@ class Main_window(tk.Tk):
         self.sunday_frame.grid(row= 0, column= 6, rowspan= 3, pady= 10)
 
     def remake_week(self):
+        '''
+        Method that refreshes days in the main function so that the comboboxes get all the new meals as options
+        '''
 
-
+        # delete the week_frame, which destroys all children
         self.week_frame.destroy()
+        # create a new frame
         self.new_week_frame = tk.Frame(
             self
         )
-
         self.new_week_frame.grid(row= 0, column= 0, rowspan= 3)
 
         
+        # pass it to the day creation method
         self.make_day_frames(self.new_week_frame)
 
     def create_menu_list(self):
+        '''
+        Method that creates the menu and grocery list output file
+        '''
+        # Capture each days currently selected meal
         monday_meal = self.monday_meal_selector.get()
         tuesday_meal = self.tuesday_meal_selector.get()
         wednesday_meal = self.wednesday_meal_selector.get()
@@ -258,6 +271,7 @@ class Main_window(tk.Tk):
         saturday_meal = self.saturday_meal_selector.get()
         sunday_meal = self.sunday_meal_selector.get()
 
+        # store them in an array to make them easier to work with
         meals_for_the_week = [
             monday_meal, 
             tuesday_meal, 
@@ -268,14 +282,17 @@ class Main_window(tk.Tk):
             sunday_meal
             ]
         
-        ingredient_list = []
+        # create a new empty array for both ingredients and meals
+        ingredient_list: list[Ingredient] = []
         meal_list: list[Meal] = []
 
+        # append to the meal_list only the meals that appear within the selected meals
         for meal_name in meals_for_the_week:
             for meal in self.meals:
                 if meal.get_name() == meal_name:
                     meal_list.append(meal)
 
+        # go by ingredient so that each ingredient is only listed once and find each ingredient that is used. 
         for ingredient in self.ingredients:
             quantity = 0
             ingredient_name = ''
@@ -289,19 +306,13 @@ class Main_window(tk.Tk):
                 quantifier = meal.get_specific_ingredient_quantifier(ingredient_name)
             ingredient_list.append(f'{quantity:.2f} {quantifier} of {ingredient_name}')
         
-                
-        
 
-        #quantity = meal.get_specific_ingredient_quantity(meal_name)
-         #           if quantity == 0:
-           #             continue
-          #          ingredient_list.append(f'{quantity} {meal.get_specific_ingredient_quantifier(meal_name)} of {ingredient.get_name()}')
-
-
-
+        # now we need to write all this to a text file
         with open('menu.txt', 'w') as f:
+            # clever way to do the days here, initialize a counter
             i = 0
 
+            # make a tuple of the days
             days = (
                 'Monday',
                 'Tuesday',
@@ -312,14 +323,17 @@ class Main_window(tk.Tk):
                 'Sunday'
             )
 
+            # write the menu to the file, with a header
             f.write('Menu:\n----------------\n')
             for meal_name in meals_for_the_week:
+                # This days of i here is just the index of the tuple, days[0] would be Monday, days[1] would be Tuesday, and so on
                 f.write(f'{days[i]}: {meal_name} \n')
                 i += 1
+            # write the ingredients list to file, with a header
             f.write(f'\nIngredients Needed for Meals selected:\n-----------------\n')
             for ingredient in ingredient_list:
                 f.write(ingredient + '\n')
-        
+        # tell the user it was successful
         messagebox.showinfo(
             title= 'Sucess!',
             message= 'Menu list sucessfully exported to file, see menu.txt for list'
