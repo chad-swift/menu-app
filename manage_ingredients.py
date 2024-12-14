@@ -1,16 +1,24 @@
 import tkinter as tk
 from tkinter import messagebox
+
+from pyparsing import col
 from sample_data import *
 from classes import *
 import pickle
+from PIL import Image, ImageTk
 class Manage_ingredients(tk.Toplevel):
- 
 
     def __init__(self):
         super().__init__()
         self.title('Manage Ingredients')
-        self.geometry('400x450'),
+        self.geometry('400x525'),
         self.resizable(False, False)
+
+        image = Image.open('Cucumber.JPEG').resize(size= [75, 50])
+
+        self.image = ImageTk.PhotoImage(image)
+
+        self.icon = tk.Label(self, image= self.image)
 
         self.ingredients = []
 
@@ -94,12 +102,13 @@ class Manage_ingredients(tk.Toplevel):
             command= self.add_ingredient
         )
         
-        self.ingredient_list_label.grid(row= 0, column= 0, sticky= 'w')
-        self.ingredient_list.grid(row= 1, column= 0, sticky= 'we', padx= 15, pady= 3)
-        self.delete_ingredient_btn.grid(row= 2, column= 0)
-        self.add_ingredient_section_label.grid(row= 3, column= 0, padx= 10, sticky= 'w')
+        self.icon.grid(row= 0, column= 0, columnspan= 3)
+        self.ingredient_list_label.grid(row= 1, column= 0, sticky= 'w')
+        self.ingredient_list.grid(row= 2, column= 0, sticky= 'we', padx= 15, pady= 3)
+        self.delete_ingredient_btn.grid(row= 3, column= 0)
+        self.add_ingredient_section_label.grid(row= 4, column= 0, padx= 10, sticky= 'w')
         
-        self.add_ingredient_frame.grid(row= 4, column= 0, padx= 10, pady= 10, sticky= 'w')
+        self.add_ingredient_frame.grid(row= 5, column= 0, padx= 10, pady= 10, sticky= 'w')
         self.add_ingreient_name_label.grid(row= 0, column= 0, pady= 10, sticky= 'w')
         self.add_ingredient_name_input.grid(row= 0, column= 1, columnspan= 3, padx= 10, pady= 10, sticky= 'w')
         self.add_ingredient_quantifier_label.grid(row= 1, column= 0, pady= 10, sticky= 'w')
