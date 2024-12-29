@@ -1,7 +1,5 @@
 import tkinter as tk
 
-from numpy import imag
-from pyparsing import col
 from add_new_meal import *
 from classes import *
 from main import *
